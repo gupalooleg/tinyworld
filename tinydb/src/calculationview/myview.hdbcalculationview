@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="tinyworld.tinydb.calculationview::myview" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="myview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="tinyworld.tinydb.table::Continent">
+    <resourceUri>tinyworld.tinydb.table::Continent</resourceUri>
+  </DataSource>
+  <DataSource id="tinyworld.tinydb.table::Country">
+    <resourceUri>tinyworld.tinydb.table::Country</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_N" joinType="inner" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="name"/>
+      <viewAttribute id="country_name"/>
+      <viewAttribute hidden="true" id="JOIN$continentId$continentId"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="tinyworld.tinydb.table::Continent">
+      <mapping xsi:type="Calculation:AttributeMapping" target="name" source="name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$continentId$continentId" source="continentId"/>
+    </input>
+    <input node="tinyworld.tinydb.table::Country">
+      <mapping xsi:type="Calculation:AttributeMapping" target="country_name" source="name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$continentId$continentId" source="continentId"/>
+    </input>
+    <filter>&quot;name&quot; = 'Europe'</filter>
+    <joinAttribute name="JOIN$continentId$continentId"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="country_name" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Name"/>
+      <keyMapping columnObjectName="Join_1" columnName="country_name"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="193"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="tinyworld.tinydb.table::Continent" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="251"/>
+    </shape>
+    <shape modelObjectName="tinyworld.tinydb.table::Country" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="241"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

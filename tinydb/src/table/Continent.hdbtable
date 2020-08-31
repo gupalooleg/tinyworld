@@ -1,0 +1,6 @@
+column table "tinyworld.tinydb.table::Continent"(
+	"continentId" integer comment 'Continent Id',
+	"name" nvarchar(256) comment 'Name',
+	primary key("continentId")
+) comment 'Continent'
+  WITH ASSOCIATIONS( join "tinyworld.tinydb.table::Country" as "C" on "continentId" = "C"."continentId")
